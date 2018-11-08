@@ -1,0 +1,71 @@
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../polymer/polymer-element.html">
+
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="import" href="nc-carousel-items.html">
+
+<dom-module id="nc-carousel">
+  <template>
+    <!-- Styles MUST be inside template -->
+    <style>
+      nc-carousel-items {
+        width: 100%;
+      }
+    
+
+      nc-carousel-items::after {
+        display: block;
+        content: '';
+        padding-top: 75%; /* 4:3 */
+      }
+
+     @media (min-height: 769px) {
+        nc-carousel-items::after {
+          display: block;
+          content: '';
+          padding-top: 56.25%; /* 16:9 */
+        }
+      }
+
+      nc-carousel-items img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+
+    <nc-carousel-items
+      auto-play="[[autoPlay]]"
+      auto-play-time-change="[[autoPlayTimeChange]]">
+      <template is="dom-repeat" items="[[carouselData]]" slot="images">
+        <img src="[[item.url]]">
+      </template>
+      
+    </nc-carousel-items>
+
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class NcCarousel extends Polymer.Element {
+      static get is() { return 'nc-carousel' }
+      static get properties() {
+        return {
+          autoPlay: {
+            type: Boolean,
+            value: false
+          },
+          /* Time in seconds */
+          autoPlayTimeChange: Number,
+          carouselData: Object
+        };
+      }
+    }
+
+    customElements.define(NcCarousel.is, NcCarousel);
+
+  </script>
+</dom-module>

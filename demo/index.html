@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>nc-carousel</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer-element.html">
+  <link rel="import" href="../../iron-ajax/iron-ajax.html">
+  
+  <link rel="import" href="../nc-carousel.html">
+</head>
+
+<body>
+<dom-module id="nc-carousel-demo">
+  <template>
+    <style>
+      .container{
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <iron-ajax
+      auto
+      id="getImagesList"
+      url="images.json"
+      handle-as="json"
+      last-response="{{dataImagesList}}">
+    </iron-ajax>
+      
+    <div class="container">
+        <nc-carousel
+          carousel-data="[[dataImagesList.data]]"
+          auto-play
+          auto-play-time-change="2">
+        </nc-carousel>
+    </div>
+
+  
+  </template>
+  <script>
+    class NcCarouselDemo extends Polymer.Element {
+      static get is() {
+        return 'nc-carousel-demo';
+      }
+    }
+    window.customElements.define(NcCarouselDemo.is, NcCarouselDemo);
+
+  </script>
+  </dom-module>
+  <nc-carousel-demo></nc-carousel-demo>
+  </body>
+  </html>
