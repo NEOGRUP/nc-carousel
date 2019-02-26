@@ -85,11 +85,12 @@ class NcCarouselItems extends PolymerElement {
   next() { 
     let elem = (this.selected && this.selected.nextElementSibling);
 
-    if (this.selected.nextElementSibling.nodeName=="DOM-REPEAT") {
-      this.selected = this.firstElementChild; 
-      elem = this.firstElementChild;
-    }
-    if (elem && !this._touchDir) {
+    if (this.childElementCount > 2){
+      if (this.selected.nextElementSibling.nodeName=="DOM-REPEAT") {
+        this.selected = this.firstElementChild; 
+        elem = this.firstElementChild;
+      }
+      if (elem && !this._touchDir) {
         // Setup transition start state
         const oldSelected = this.selected;
         this._translateX(oldSelected, 0);
@@ -100,6 +101,7 @@ class NcCarouselItems extends PolymerElement {
         this._translateX(oldSelected, -this.offsetWidth, true /* transition */);
         this._translateX(elem, 0, true /* transition */);
       }
+    }
   }
 
   _translateX(elem, x, transition) {
