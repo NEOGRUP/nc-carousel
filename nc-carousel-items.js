@@ -87,7 +87,6 @@ class NcCarouselItems extends PolymerElement {
 
     if (this.childElementCount > 2){
       if (this.selected.nextElementSibling.nodeName=="DOM-REPEAT") {
-        this.selected = this.firstElementChild; 
         elem = this.firstElementChild;
       }
       if (elem && !this._touchDir) {
